@@ -4,7 +4,7 @@ services:
   - type: web
     name: meridian
     runtime: docker
-    plan: starter # free instances sleep when idle, which would stop the bot mid-demo
+    plan: free # free instances sleep after ~15 min idle; demo needs a warm tab open
     region: singapore
     branch: main
     healthCheckPath: /health
