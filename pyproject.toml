@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meridian"
+version = "0.1.0"
+description = "Meridian: an inventory-aware market maker for Delta Exchange perpetuals"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.162",
+    "httpx>=0.28",
+    "websockets>=15",
+    "pydantic>=2.10",
+    "pydantic-settings>=2.6",
+    "sqlmodel>=0.0.24",
+    "psycopg[binary]>=3.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.25", "ruff>=0.8"]
+
+[tool.setuptools.packages.find]
+include = ["meridian*"]
+
+[tool.fastapi]
+entrypoint = "meridian.main:app"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "ASYNC", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]
