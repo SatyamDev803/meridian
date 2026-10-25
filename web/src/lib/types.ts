@@ -48,6 +48,7 @@ export interface State {
   hasKeys: boolean;
   symbol: string;
   chaosEnabled: boolean;
+  controlLocked?: boolean;
   contract: { productId: number; tickSize: number; contractValue: number; makerFee: number } | null;
   market: {
     fair: number | null;

@@ -180,7 +180,7 @@ export function SettingsSheet({
               </div>
             </section>
 
-            <section className="lg:hidden">
+            <section>
               <h3 className="px-1 pb-2 text-[15px] font-semibold">Appearance</h3>
               <div className="flex items-center justify-between rounded-2xl bg-surface p-4">
                 <span className="text-[15px]">Theme</span>
@@ -188,12 +188,13 @@ export function SettingsSheet({
               </div>
             </section>
 
+            {state?.controlLocked && (
             <section>
               <h3 className="px-1 pb-2 text-[15px] font-semibold">Access</h3>
               <form className="rounded-2xl bg-surface p-4" onSubmit={(e) => e.preventDefault()}>
                 <input type="text" name="username" autoComplete="username" value="meridian" readOnly hidden />
                 <label htmlFor="control-key" className="text-[13px] text-label-2">
-                  Control key, needed only if the server sets one
+                  This server is locked. Enter its control key to start, stop or test it.
                 </label>
                 <input
                   id="control-key"
@@ -208,6 +209,7 @@ export function SettingsSheet({
                 />
               </form>
             </section>
+            )}
           </div>
         </Dialog.Popup>
       </Dialog.Portal>

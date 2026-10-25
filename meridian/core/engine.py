@@ -913,6 +913,7 @@ class Engine:
             "hasKeys": self.settings.has_keys,
             "symbol": self.symbol,
             "chaosEnabled": self.settings.chaos_enabled,
+            "controlLocked": bool(self.settings.control_api_key),
             "contract": None
             if self.contract is None
             else {
