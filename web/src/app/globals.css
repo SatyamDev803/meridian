@@ -94,6 +94,10 @@
   --radius-card: 22px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   background: var(--canvas);

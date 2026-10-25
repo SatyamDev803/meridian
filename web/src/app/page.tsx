@@ -7,6 +7,7 @@ import { Economics } from "@/components/Economics";
 import { HealthRings } from "@/components/HealthRings";
 import { Hero } from "@/components/Hero";
 import { Ladder } from "@/components/Ladder";
+import { Overview } from "@/components/Overview";
 import { PositionCard } from "@/components/PositionCard";
 import { SafetyChecks } from "@/components/SafetyChecks";
 import { SettingsSheet } from "@/components/SettingsSheet";
@@ -41,6 +42,8 @@ export default function Dashboard() {
       try {
         await api.control(a);
         notify(DONE[a]);
+        // Starting from the hero would otherwise show nothing changing: take the viewer to the live quotes.
+        if (a === "start") document.getElementById("market")?.scrollIntoView({ behavior: "smooth" });
       } catch (e) {
         notify((e as Error).message, "error");
       } finally {
@@ -54,15 +57,28 @@ export default function Dashboard() {
     <>
       <TopBar state={state} link={link} busy={busy} onAction={act} onOpenSettings={() => setSettingsOpen(true)} />
       <Toasts items={toasts} />
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6">
+        <Overview state={state} />
+      </div>
       <main className="mx-auto grid max-w-[1440px] gap-4 px-4 py-5 sm:px-6 lg:grid-cols-12 lg:gap-5">
         <div className="flex min-w-0 flex-col gap-4 lg:col-span-8 lg:gap-5">
-          <Hero state={state} points={prices} />
-          <PositionCard state={state} pnl={pnl} />
-          <Economics state={state} />
-          <DecisionLog decisions={decisions} available={decisionsAvailable} />
-          <Activity events={events} />
+          <div id="market" className="scroll-mt-20">
+            <Hero state={state} points={prices} />
+          </div>
+          <div id="position" className="scroll-mt-20">
+            <PositionCard state={state} pnl={pnl} />
+          </div>
+          <div id="economics" className="scroll-mt-20">
+            <Economics state={state} />
+          </div>
+          <div id="decisions" className="scroll-mt-20">
+            <DecisionLog decisions={decisions} available={decisionsAvailable} />
+          </div>
+          <div id="activity" className="scroll-mt-20">
+            <Activity events={events} />
+          </div>
         </div>
-        <div className="flex min-w-0 flex-col gap-4 lg:col-span-4 lg:gap-5">
+        <div id="safety" className="flex min-w-0 scroll-mt-20 flex-col gap-4 lg:col-span-4 lg:gap-5">
           <HealthRings state={state} />
           <SafetyChecks state={state} />
           <Ladder state={state} />
