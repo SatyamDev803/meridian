@@ -166,7 +166,9 @@ class DeltaSocket:
                 if self._ws is not None:
                     await self._subscribe(self._ws)
             else:
-                self.on_state("auth_failed", str(msg.get("status") or msg.get("message")))
+                detail = str(msg.get("status") or msg.get("message"))
+                self.on_state("auth_failed", detail)
+                await self.force_reconnect(f"key-auth failed: {detail}")
             return
         if kind == "subscriptions":
             errors = [c for c in msg.get("channels", []) if c.get("error")]
