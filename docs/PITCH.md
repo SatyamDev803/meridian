@@ -27,7 +27,7 @@ reconcile everything, and stop on bad data.
 | Technical code | 20% | Own signed Delta client, `ob_updates` book with sequence and CRC32 checksum, async engine, Decimal everywhere, 107 tests including a full engine test against a fake exchange, plus live end-to-end runs on the Delta demo account. |
 | Automation | 15% | Hands-off: reconnects, resyncs, requotes, reconciles and heartbeats on its own. Optional auto-start. |
 | Demo | 15% | Live dashboard, chaos buttons, kill switch, dead man's switch. |
-| Bonus | | Dashboard, Render deployment, fail-safes. |
+| Bonus | | Dashboard, Vercel deployment, fail-safes. |
 
 ## Five-minute demo
 

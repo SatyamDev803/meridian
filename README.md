@@ -143,14 +143,20 @@ talks to `http://localhost:8000` through `web/.env.development`.
 ### Testnet keys
 
 1. Sign up at [testnet.delta.exchange](https://testnet.delta.exchange) and fund the demo wallet.
-2. Create an API key with trading permission. Leave IP whitelisting off if you deploy to Render.
+2. Create an API key with trading permission. Leave IP whitelisting off if you deploy.
 3. Put the key and secret in `.env`.
 
 ## Deploy
 
-`render.yaml` defines one Docker web service in Singapore plus a Postgres database. Set
-`DELTA_API_KEY` and `DELTA_API_SECRET` in the Render dashboard. A `CONTROL_API_KEY` is generated
-for you; enter it in the dashboard under Settings, Access, so only you can start or stop the bot.
+Vercel runs the same Dockerfile as a container service; `vercel.json` routes all traffic to it.
+Set `DELTA_API_KEY`, `DELTA_API_SECRET` and a `CONTROL_API_KEY` as project env vars, then
+`vercel --prod`. Instances can suspend when idle; an open dashboard stream keeps the bot live,
+and the dead man's switch pulls the orders if the process dies.
+
+Alternatively, `render.yaml` defines one Docker web service in Singapore plus a Postgres
+database. Set `DELTA_API_KEY` and `DELTA_API_SECRET` in the Render dashboard. A
+`CONTROL_API_KEY` is generated for you; enter it in the dashboard under Settings, Access, so
+only you can start or stop the bot.
 
 ## Test it
 
