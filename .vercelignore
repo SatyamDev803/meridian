@@ -1,0 +1,14 @@
+.env
+.env.local
+.venv
+*.db
+.DS_Store
+.git
+.pytest_cache
+.ruff_cache
+**/__pycache__
+web/node_modules
+web/.next
+web/out
+node_modules
+.vercel
